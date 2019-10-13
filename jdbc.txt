@@ -19,7 +19,7 @@ Scanner sc = new Scanner(System.in);
 
 public static void main(String[] args) {
 
-⦁	Object creation cakes c = new cakes();
+	Object creation cakes c = new cakes();
 
 Scanner sc = new Scanner(System.in); System.out.println("\n\nWELCOME BAKERY MANAGEMENT SYSTEM ");
 
@@ -59,11 +59,6 @@ break;
 
 case 5:
 
-
-
-
-17
-
 System.out.println("Thank you for visiting us..!"); break;
 
 default:
@@ -76,15 +71,11 @@ break;
 
 }
 
-
-
 //log in table
 
 private void login() {
 
-⦁	TODO Auto-generated method stub
 
-⦁	admin log in code
 
 String user= new String("soaib");
 
@@ -133,11 +124,6 @@ switch(hh) {
 case 1:
 
 c.show();
-
-
-
-
-18
 break;
 
 case 2:
@@ -195,7 +181,7 @@ System.out.println("Please enter correct username and password\n\n");
 
 private void show() {
 
-⦁	TODO Auto-generated method stub try {
+try {
 
 Connection con = getConnect();
 
@@ -290,11 +276,6 @@ System.out.println("Your ORDER ID is not correct\n\n. ");
 
 }
 
-
-
-
-
-20
 }catch(Exception e) {
 
 e.printStackTrace();
@@ -358,11 +339,6 @@ System.out.println("Successfully changed	your Order ...
 
 
 else {
-
-
-
-
-21
 System.out.println("Please check your email and customer
 
 name.. \n.\n.");
@@ -413,7 +389,8 @@ e.printStackTrace();
 
 private void insertData() {
 
-⦁	TODO Auto-generated method stub cake ca = new cake(); System.out.println("Enter customer name : "); String wname = sc.next(); ca.setCust_name(wname);
+//	TODO Auto-generated method stub 
+cake ca = new cake(); System.out.println("Enter customer name : "); String wname = sc.next(); ca.setCust_name(wname);
 
 
 System.out.println("Enter cake ID from our products : ");
@@ -430,11 +407,6 @@ String wplace = sc.next();
 
 ca.setOrder_place(wplace);
 
-
-
-
-
-22
 System.out.println("Enter your mobile number please : ");
 
 String cno = sc.next();
@@ -512,11 +484,6 @@ e.printStackTrace();
 }
 
 }
-
-
-
-
-23
 
 else {
 
