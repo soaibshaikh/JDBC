@@ -1,0 +1,546 @@
+
+package bakery;
+
+import java.sql.DriverManager;
+
+import java.sql.ResultSet;
+
+import java.sql.SQLException;
+
+import java.util.Scanner;
+
+import com.mysql.jdbc.Connection;
+
+import com.mysql.jdbc.PreparedStatement;
+
+public class cakes {
+
+Scanner sc = new Scanner(System.in);
+
+public static void main(String[] args) {
+
+⦁	Object creation cakes c = new cakes();
+
+Scanner sc = new Scanner(System.in); System.out.println("\n\nWELCOME BAKERY MANAGEMENT SYSTEM ");
+
+int ch;
+
+do {
+
+System.out.println("\n\nEnter Your Choice :"); System.out.println("1. Show Products:"); System.out.println("2. Orders your products :"); System.out.println("3. To change your order details :"); System.out.println("4. Admin panel: "); System.out.println("5. Exit");
+
+ch = sc.nextInt();
+
+switch(ch) {
+
+case 1:
+
+c.show();
+
+break;
+
+case 2:
+
+c.insertData();
+
+break;
+
+case 3:
+
+c.updateData();
+
+break;
+
+case 4:
+
+c.login();
+
+break;
+
+case 5:
+
+
+
+
+17
+
+System.out.println("Thank you for visiting us..!"); break;
+
+default:
+
+break;
+
+}
+
+}while(ch!= 5);
+
+}
+
+
+
+//log in table
+
+private void login() {
+
+⦁	TODO Auto-generated method stub
+
+⦁	admin log in code
+
+String user= new String("soaib");
+
+String password = new String ("Soaib123");
+
+System.out.println("Enter Your username :");
+
+String customer = sc.next();
+
+System.out.println("Enter Your password :");
+
+String pass = sc.next();
+
+if(user.equals(customer)	&& password.equals(pass) ) {
+
+System.out.println("You login Successfully\n\n"); System.out.println("\n\nWELCOME TO ADMIN PANEL\n\n ");
+
+try {
+
+cakes c = new cakes();
+
+Scanner sc = new Scanner(System.in);
+
+int hh;
+
+do {
+
+System.out.println("Enter Your Choice :");
+
+System.out.println("1. Show Our
+
+Products:");
+
+System.out.println("2. To check the order
+
+detail:");
+
+System.out.println("3. cancel	order :");
+
+System.out.println("4. Exit");
+
+hh = sc.nextInt();
+
+switch(hh) {
+
+case 1:
+
+c.show();
+
+
+
+
+18
+break;
+
+case 2:
+
+c.displayData();
+
+break;
+
+case 3:
+
+c.deleteData();
+
+break;
+
+case 4:
+
+System.out.println("Thank you for
+
+visiting Adminpanel..!");
+
+break;
+
+default:
+
+System.out.println("Please enter a
+
+valid key..!");
+
+break;
+
+}
+
+}while(hh!= 4);
+
+}
+
+
+
+
+catch(Exception e) {
+
+e.printStackTrace();
+
+}
+
+}
+
+else {
+
+System.out.println("Please enter correct username and password\n\n");
+
+}
+
+}
+
+private void show() {
+
+⦁	TODO Auto-generated method stub try {
+
+Connection con = getConnect();
+
+String query = "select * from products";
+
+PreparedStatement pst = (PreparedStatement)
+
+con.prepareStatement(query);
+
+ResultSet rs = pst.executeQuery();
+
+System.out.println("PRODUCT ID\tPRODUCT NAME");
+
+while(rs.next()) {
+
+System.out.println(rs.getInt(1)+"\t\t"+rs.getString(2));
+
+}rs.close();
+
+
+
+
+19
+pst.close();
+
+con.close();
+
+}catch(Exception e) {
+
+e.printStackTrace();
+
+}
+
+}
+
+public Connection getConnect() throws SQLException { try {
+
+DriverManager.registerDriver(new com.mysql.jdbc.Driver()); Connection con = (Connection)
+
+DriverManager.getConnection("jdbc:mysql://localhost:3306/bakery?useSSL=false","admin","S oaib123#");
+return con;
+
+}catch(Exception e){
+
+e.printStackTrace();
+
+}
+
+return null;
+
+}
+
+private void deleteData() {
+
+try {
+
+cake ca = new cake();
+
+System.out.println("Enter Your customer name :");
+
+String cust = sc.next();
+
+ca.setCust_name(cust);
+
+System.out.println("Enter Your email :");
+
+String email = sc.next();
+
+ca.setEmail(email);
+
+Connection con = getConnect();
+
+String query = "delete from cakes where cust_name=? and email=?"; PreparedStatement pst = (PreparedStatement)
+
+con.prepareStatement(query);
+
+pst.setString(1, cust);
+
+pst.setString(2, email);
+
+
+
+int x=pst.executeUpdate();
+
+if(x==1) {
+
+System.out.println("Your order has been cancelled.\n");
+
+}else {
+
+System.out.println("Your ORDER ID is not correct\n\n. ");
+
+}
+
+
+
+
+
+20
+}catch(Exception e) {
+
+e.printStackTrace();
+
+}
+
+}
+
+private void updateData() {
+
+cake ca = new cake();
+
+System.out.println("Please Enter the email :");
+
+String i = sc.next();
+
+ca.setEmail(i);
+
+
+
+System.out.println("Enter the Customer name :"); String wname = sc.next(); ca.setCust_name(wname);
+
+System.out.println("Enter the Cake Id you want :"); int wbrand = sc.nextInt(); ca.setP_id(wbrand);
+
+
+System.out.println("Enter the Cake order place :"); String wplace = sc.next(); ca.setOrder_place(wplace);
+
+try {
+
+Connection con = getConnect();
+
+String query = "update cakes set cust_name=?,
+
+p_id=?,order_place=? where cust_name =? and email=?"; PreparedStatement pst = (PreparedStatement)
+con.prepareStatement(query);
+
+pst.setString(1, ca.getCust_name());
+
+pst.setInt(2, ca.getP_id());
+
+pst.setString(3, ca.getOrder_place());
+
+pst.setString(4, ca.getCust_name());
+
+pst.setString(5, ca.getEmail());
+
+int x = pst.executeUpdate();
+
+pst.close();
+
+con.close();
+
+if(x==1) {
+
+System.out.println("Successfully changed	your Order ...
+
+\n.\n." );
+
+}
+
+
+
+else {
+
+
+
+
+21
+System.out.println("Please check your email and customer
+
+name.. \n.\n.");
+
+}
+
+}catch(Exception e) {
+
+e.printStackTrace();
+
+}
+
+}
+
+private void displayData() {
+
+try {
+
+Connection con = getConnect();
+
+String query = "select * from cakes";
+
+PreparedStatement pst = (PreparedStatement)
+
+con.prepareStatement(query);
+
+ResultSet rs = pst.executeQuery();
+
+System.out.println("ID \tCUSTOMER NAME \tCAKE ID \t ORDER PLACE \tMOBILE NUMBER \tEMAIL");
+
+while(rs.next()) {
+
+System.out.println(rs.getInt(1)+"\t"+rs.getString(2)+"\t\t"+rs.getInt(3)+"\t\t"+ rs.getString(4)+"\t\t"+rs.getString(5)+"\t\t"+rs.getString(6));
+
+}rs.close();
+
+pst.close();
+
+con.close();
+
+}catch(Exception e) {
+
+e.printStackTrace();
+
+}
+
+}
+
+private void insertData() {
+
+⦁	TODO Auto-generated method stub cake ca = new cake(); System.out.println("Enter customer name : "); String wname = sc.next(); ca.setCust_name(wname);
+
+
+System.out.println("Enter cake ID from our products : ");
+
+int wbrand = sc.nextInt();
+
+ca.setP_id(wbrand);
+
+
+
+System.out.println("Enter order place : ");
+
+String wplace = sc.next();
+
+ca.setOrder_place(wplace);
+
+
+
+
+
+22
+System.out.println("Enter your mobile number please : ");
+
+String cno = sc.next();
+
+ca.setMobile_no(cno);
+
+System.out.println("Enter your Email please : ");
+
+String email = sc.next();
+
+ca.setEmail(email);
+
+try {
+
+Connection con = getConnect();
+
+String query = "insert into cakes values(NULL,?,?,?,?,?)"; PreparedStatement pst = (PreparedStatement)
+con.prepareStatement(query);
+
+pst.setString(1, ca.getCust_name());
+
+pst.setInt(2, ca.getP_id());
+
+pst.setString(3, ca.getOrder_place());
+
+pst.setString(4, ca.getMobile_no());
+
+pst.setString(5, ca.getEmail());
+
+int x = pst.executeUpdate();
+
+
+
+if(x==1) {
+
+try {
+
+String query1= "	select * from cakes where
+
+cust_name=? and email=? ;";
+
+PreparedStatement pstt =
+
+(PreparedStatement) con.prepareStatement(query1);
+
+pstt.setString(1, ca.getCust_name());
+
+pstt.setString(2, ca.getEmail());
+
+ResultSet rss = pstt.executeQuery();
+
+if(rss.next()) {
+
+System.out.println("This is Your
+
+Order Recipt...\n\n");
+
+System.out.println("ORDERID
+
+\tCUSTOMER NAME	\tCAKE NAME\tORDER PLACE \tMOBILE NUMBER\t\tEMAIL");
+
+System.out.println(rss.getInt(1)+"\t\t"+rss.getString(2)+"\t\t"+rss.getString(3)
+
++"\t\t"+rss.getString(4)+"\t\t"+rss.getString(5)+"\t\t"+rss.getString(6)); System.out.println("You order
+Successfully recorded..\n\n.");
+
+}
+
+}
+
+catch(Exception e) {
+
+e.printStackTrace();
+
+}
+
+}
+
+
+
+
+23
+
+else {
+
+System.out.println("Something Error while Inserting
+
+Record\n.\n");
+
+}
+
+con.close();
+
+pst.close();
+
+}
+
+catch(Exception e) {
+
+e.printStackTrace();
+
+}
+
+}
+
+}
+
+
+

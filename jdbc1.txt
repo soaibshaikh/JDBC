@@ -1,0 +1,91 @@
+
+package bakery;
+
+public class cake {
+
+private int order_id;
+
+private String cust_name;
+
+private int p_id;
+
+private String order_place;
+
+private String mobile_no;
+
+private String email;
+
+
+
+
+public int getOrder_id() {
+
+return order_id;
+
+}
+
+public void setOrder_id(int order_id) {
+
+this.order_id = order_id;
+
+}
+
+public String getCust_name() {
+
+return cust_name;
+
+}
+
+public void setCust_name(String cust_name) {
+
+this.cust_name = cust_name;
+
+}
+
+public int getP_id() {
+
+return p_id;
+
+}
+
+public void setP_id(int p_id) {
+
+this.p_id = p_id;
+
+}
+
+public String getOrder_place() {
+
+return order_place;
+
+}
+
+public void setOrder_place(String order_place) { this.order_place = order_place;
+
+}
+
+public String getMobile_no() {
+
+return mobile_no;
+
+}
+
+public void setMobile_no(String mobile_no) {
+
+this.mobile_no = mobile_no;
+
+}
+
+public String getEmail() {
+
+return email;
+
+}
+
+public void setEmail(String email) {
+
+this.email = email;
+
+}
+
+}
